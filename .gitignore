@@ -1,0 +1,71 @@
+# Claude Code orchestration: local-only, never published
+.claude/
+CLAUDE.md
+PHASE_PLAN.md
+KICKOFF_PROMPT.md
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Python pipeline
+pipeline/.venv/
+pipeline/.uv-cache/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+*.egg-info/
+*.egg
+
+# Raw and intermediate data (regenerable from source)
+pipeline/data/raw/
+pipeline/data/intermediate/
+pipeline/data/cache/
+
+# Web app
+webapp/node_modules/
+webapp/dist/
+webapp/.vite/
+webapp/coverage/
+webapp/.turbo/
+.parcel-cache/
+
+# Generated tiles are committed to webapp/public/tiles/ on purpose.
+# Comment the next line if you want to gitignore them and host elsewhere.
+# webapp/public/tiles/*.pmtiles
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Local overrides
+*.local
+local.config.*
+
+# Test and tooling artifacts
+.playwright-mcp/

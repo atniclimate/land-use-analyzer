@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 30% 98%;
+    --foreground: 20 14% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 14% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14% 8%;
+
+    /* calm, land-and-water green */
+    --primary: 158 42% 26%;
+    --primary-foreground: 40 30% 98%;
+
+    --secondary: 40 12% 93%;
+    --secondary-foreground: 20 14% 12%;
+
+    --muted: 40 12% 93%;
+    --muted-foreground: 25 8% 40%;
+
+    --accent: 158 30% 92%;
+    --accent-foreground: 158 42% 18%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 40 30% 98%;
+
+    --border: 30 10% 86%;
+    --input: 30 10% 86%;
+    --ring: 158 42% 26%;
+
+    --radius: 0.5rem;
+
+    /* Vulnerability tiers. Color is never the only cue; labels and patterns
+       accompany these everywhere they appear (see VOICE_GUIDE.md). */
+    --tier-low: 152 35% 38%;
+    --tier-medium: 38 84% 42%;
+    --tier-high: 4 64% 46%;
+  }
+
+  .dark {
+    --background: 20 14% 8%;
+    --foreground: 40 30% 96%;
+
+    --card: 20 14% 10%;
+    --card-foreground: 40 30% 96%;
+
+    --popover: 20 14% 10%;
+    --popover-foreground: 40 30% 96%;
+
+    --primary: 158 38% 52%;
+    --primary-foreground: 20 14% 8%;
+
+    --secondary: 20 8% 18%;
+    --secondary-foreground: 40 30% 96%;
+
+    --muted: 20 8% 18%;
+    --muted-foreground: 30 8% 64%;
+
+    --accent: 158 24% 22%;
+    --accent-foreground: 40 30% 96%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 40 30% 96%;
+
+    --border: 20 8% 22%;
+    --input: 20 8% 22%;
+    --ring: 158 38% 52%;
+
+    --tier-low: 152 38% 48%;
+    --tier-medium: 38 80% 55%;
+    --tier-high: 4 68% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+}

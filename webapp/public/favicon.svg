@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Land Use Analyzer">
+  <rect width="32" height="32" rx="7" fill="#26614a" />
+  <circle cx="23" cy="9.5" r="3" fill="#e9d9a8" />
+  <path d="M4 22c3.5-4.5 6.5-4.5 9.5-1.5S20 23 28 16.5V28H4z" fill="#7fb89c" />
+</svg>
