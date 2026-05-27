@@ -1,0 +1,17 @@
+# Normalize line endings: store text as LF in the repo, check out as LF on all
+# platforms. Prevents CRLF churn between Windows and CI/Linux.
+* text=auto eol=lf
+
+# Binary assets: never munge line endings or try to diff as text.
+*.pmtiles binary
+*.mbtiles binary
+*.mdb binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
