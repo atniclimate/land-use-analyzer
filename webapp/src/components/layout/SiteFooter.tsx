@@ -10,8 +10,9 @@ export function SiteFooter() {
         </p>
         <p>No accounts. No tracking. No cookies. We update the data monthly.</p>
         <p>
-          Data current as of <span className="font-medium text-foreground">a date shown here</span>.
-          This tool is informational and is not legal or financial advice.
+          Data current as of{" "}
+          <span className="font-medium text-foreground">{SITE.dataCurrentAsOf}</span>. This tool is
+          informational and is not legal or financial advice.
         </p>
         <p>
           Licensed under PolyForm Noncommercial 1.0.0.{" "}

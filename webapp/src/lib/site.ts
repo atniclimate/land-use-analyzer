@@ -8,6 +8,8 @@ export const SITE = {
   county: "Whatcom County",
   attribution: "ATNI Climate",
   repoUrl: "https://github.com/atniclimate/land-use-analyzer",
+  // Date of the underlying assessor pull. Update when the pipeline refreshes.
+  dataCurrentAsOf: "May 1, 2026",
 } as const;
 
 export type StoryPath = "/flood" | "/drought" | "/changing-hands" | "/building";

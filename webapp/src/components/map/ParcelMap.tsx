@@ -42,6 +42,20 @@ const usd = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+function formatAcres(acres: number | null): string {
+  if (acres == null) return "unknown";
+  if (acres > 0 && acres < 0.01) return "less than 0.01";
+  return acres.toFixed(2);
+}
+
+function formatAssessedValue(value: number | null, category: OwnershipCategory): string {
+  if (value == null) return "unknown";
+  if (value === 0) {
+    return category === "government_tribal_utility" ? "Exempt" : "No assessment on file";
+  }
+  return usd.format(value);
+}
+
 function fillColor(feature: { properties: ParcelProperties }): Rgba {
   const props = feature.properties;
   if (props.ownership_category === "local") {
@@ -260,10 +274,10 @@ function ParcelDetail({
       <dl className="mt-3 space-y-1.5 text-muted-foreground">
         <Row label="Category" value={categoryLabel} />
         <Row label="Where" value={location} />
-        <Row label="Acres" value={parcel.acres != null ? parcel.acres.toFixed(2) : "unknown"} />
+        <Row label="Acres" value={formatAcres(parcel.acres)} />
         <Row
           label="Assessed value"
-          value={parcel.assessed_value != null ? usd.format(parcel.assessed_value) : "unknown"}
+          value={formatAssessedValue(parcel.assessed_value, parcel.ownership_category)}
         />
         <Row
           label="Years held"
