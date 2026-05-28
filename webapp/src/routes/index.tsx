@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 
-import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { SITE, STORY_VIEWS } from "@/lib/site";
 
@@ -35,9 +34,20 @@ export function LandingPage() {
         ))}
       </section>
 
-      <section className="mt-8">
-        <Link to="/explore" className={buttonVariants({ variant: "outline" })}>
-          Explore the layers
+      <section className="mt-6">
+        <Link to="/explore" className="group block rounded-lg focus-visible:outline-none">
+          <Card className="h-full transition-colors group-hover:border-primary group-focus-visible:ring-2 group-focus-visible:ring-ring">
+            <CardHeader>
+              <CardTitle>Explore the layers</CardTitle>
+              <CardDescription>Or browse on your own</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                All four maps on one page. Toggle the layers you want to see. Click any parcel for
+                owner, acres, value, and tenure.
+              </p>
+            </CardContent>
+          </Card>
         </Link>
       </section>
     </div>

@@ -5,6 +5,7 @@ import { GeoJsonLayer } from "@deck.gl/layers";
 import { MapboxOverlay } from "@deck.gl/mapbox";
 import { load } from "@loaders.gl/core";
 import { MVTLoader } from "@loaders.gl/mvt";
+import { Link } from "@tanstack/react-router";
 import type { Feature, Geometry } from "geojson";
 import type { Map as MapLibreMap } from "maplibre-gl";
 
@@ -192,21 +193,30 @@ function DataSources({ tenurePlaceholder }: { tenurePlaceholder: boolean }) {
             className={`mt-1 inline-block h-2 w-2 shrink-0 rounded-full ${tenurePlaceholder ? "bg-amber-500" : "bg-emerald-500"}`}
             aria-hidden="true"
           />
-          <div>
-            <div className="flex flex-wrap items-center gap-x-2 font-medium text-foreground">
-              <span>Tenure (years held)</span>
-              {tenurePlaceholder && (
+          {tenurePlaceholder ? (
+            <Link
+              to="/methodology/$topic"
+              params={{ topic: "tenure" }}
+              className="block rounded-sm hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <span className="flex flex-wrap items-center gap-x-2 font-medium text-foreground">
+                <span>Tenure (years held)</span>
                 <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-900">
                   Data needed
                 </span>
-              )}
+              </span>
+              <span className="block text-muted-foreground">
+                Placeholder shown. Real sale dates not yet sourced.
+              </span>
+            </Link>
+          ) : (
+            <div>
+              <div className="flex flex-wrap items-center gap-x-2 font-medium text-foreground">
+                <span>Tenure (years held)</span>
+              </div>
+              <div className="text-muted-foreground">Sale dates from the assessor.</div>
             </div>
-            <div className="text-muted-foreground">
-              {tenurePlaceholder
-                ? "Placeholder shown. Real sale dates not yet sourced."
-                : "Sale dates from the assessor."}
-            </div>
-          </div>
+          )}
         </li>
       </ul>
     </div>

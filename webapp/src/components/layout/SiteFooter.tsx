@@ -1,9 +1,21 @@
+import { useState } from "react";
+
 import { SITE } from "@/lib/site";
 
 export function SiteFooter() {
+  const [hidden, setHidden] = useState<boolean>(false);
+
   return (
     <footer className="border-t bg-card">
       <div className="container flex flex-col gap-3 py-8 text-sm text-muted-foreground">
+        {!hidden && (
+          <img
+            src="/atni-climate-mark.png"
+            alt=""
+            className="mb-3 block h-10 w-auto max-w-full self-start"
+            onError={() => setHidden(true)}
+          />
+        )}
         <p>
           Built by {SITE.attribution}. Data from public agencies including FEMA, USGS, NOAA, the
           Washington Department of Ecology, the US Drought Monitor, and the Whatcom County Assessor.

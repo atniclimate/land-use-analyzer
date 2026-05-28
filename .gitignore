@@ -48,6 +48,12 @@ webapp/.turbo/
 webapp/public/data/*.geojson
 webapp/public/data/*.meta.json
 
+# ATNI Climate wordmark assets are sourced from a maintainer-local OneDrive image
+# and used for the local demo. The deployed site falls back to the styled text
+# wordmark when the file is absent. Regenerate with the crop script if needed.
+webapp/public/atni-climate-mark.png
+webapp/public/atni-climate-mark-sm.png
+
 # Logs
 *.log
 npm-debug.log*
