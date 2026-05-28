@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
+import { MapView } from "@/components/map/MapView";
 import { buttonVariants } from "@/components/ui/button";
 import { TIERS, type StoryView } from "@/lib/site";
 
@@ -18,12 +19,8 @@ export function StoryViewScaffold({ view }: StoryViewScaffoldProps) {
       </div>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
-        <div
-          role="img"
-          aria-label={`Map placeholder for the ${view.nav} story view of Whatcom County`}
-          className="flex min-h-[24rem] items-center justify-center rounded-lg border border-dashed bg-muted/40 text-sm text-muted-foreground"
-        >
-          Map goes here in Phase 1
+        <div className="h-[32rem] overflow-hidden rounded-lg border">
+          <MapView ariaLabel={`Map of Whatcom County for the ${view.nav} story view`} />
         </div>
 
         <aside className="space-y-4">

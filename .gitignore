@@ -42,6 +42,11 @@ webapp/.turbo/
 # Comment the next line if you want to gitignore them and host elsewhere.
 # webapp/public/tiles/*.pmtiles
 
+# Generated parcel GeoJSON is large and regenerable from the pipeline; do not commit
+# it. PMTiles will become the committed/deployed parcel asset (see PHASE_PLAN 1a M4).
+webapp/public/data/*.geojson
+webapp/public/data/*.meta.json
+
 # Logs
 *.log
 npm-debug.log*

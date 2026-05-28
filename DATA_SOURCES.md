@@ -28,18 +28,17 @@ All sources are **public**. None require authentication beyond standard rate lim
 
 ### Sale date / tenure data (central classification input)
 
-`sale_date` is **central to classification**, not just to the "changing hands" story view. The 30-year tenure rule in `classify.py` gates Foreign, Out-of-State, and Concentrated Corporate flagging on whether the current owner's tenure is under 30 years. Three layered sources:
+`sale_date` is **central to classification**, not just to the "changing hands" story view. The 30-year tenure rule in `classify.py` gates Foreign, Out-of-State, and Concentrated Corporate flagging on whether the current owner's tenure is under 30 years.
 
-1. **Short master `sale_date_1`** (or equivalent column). This is the most recent sale per parcel and is the primary input. The county refreshes it monthly. Use this first.
-2. **WA Department of Revenue Real Estate Excise Tax (REET)** for historical depth.
-   - **URL**: https://dor.wa.gov/about/statistics-reports/real-estate-excise-tax-statistics (statistics); full data via public records request.
-   - **Refresh**: Quarterly summaries; bulk historical data on request.
-   - **License**: Public.
-   - **Use**: Fallback when short master lacks sale history, and depth back to 1970 for the sales velocity story view.
-3. **Whatcom County Auditor / Recorder** for cross-reference.
-   - **URL**: https://www.whatcomcounty.us/198/Auditor
-   - **Search**: https://recording.whatcomcounty.us
-   - **Use**: Verify unusual ownership changes flagged by classification (entity-to-entity transfers, multi-parcel cluster acquisitions).
+**Status (verified 2026-05).** The public short master, the `WhatcomCo_Property` ArcGIS REST layer, and the `PACSGIS_Viewer` tables all contain owner and mailing fields but **no `sale_date` column**. The pipeline therefore detects a sale-date column with a candidate-name matcher; finding none, it falls back to a clearly labeled PLACEHOLDER tenure (`tenure_source: "placeholder"`) so the map and gate run end-to-end. The web app surfaces a "Tenure: data needed" marker until a real source is wired.
+
+**Realistic sale-date paths**, in recommended pursuit order:
+
+1. **Whatcom Treasurer Service Company tax-roll file**. $350/year, written request with notarized declaration if unredacted. https://www.whatcomcounty.us/410. May or may not include a per-parcel `sale_date` column; **call 360-778-5000 to confirm the spec** before paying. Cleanest legal path if it carries the data.
+2. **WA DOR Real Estate Excise Tax (REET) Public Records Request**. Per-transaction affidavits with parcel + sale date + price + grantor/grantee, multi-decade depth. Email DORPublicRecords@dor.wa.gov or call 360-704-5741. Five business-day acknowledgement, weeks to months for a county-wide bulk fulfillment. Anchors the historical tail back to 1970.
+3. **PACS SaleSearch scrape** (`https://property.whatcomcounty.us/propertyaccess/SaleSearch.aspx?cid=0`). Public, browseable without auth, accepts sale-date ranges. Last resort: build a polite, rate-limited scraper. Document clearly in this file and rate-limit aggressively.
+
+For cross-reference and unusual-transfer verification, the Auditor / Recorder is image-level only (`https://recording.whatcomcounty.us`, document-by-document search; not bulk).
 
 **Missing-data policy**: If `sale_date` is missing or earlier than 1970, treat the parcel as **long-established**. Do not flag. This is conservative by design; the rule preferences "neighbor we don't know about" over "false flag."
 

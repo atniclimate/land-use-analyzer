@@ -39,13 +39,38 @@ class Thresholds(BaseModel):
     concentration: ConcentrationThresholds = Field(default_factory=ConcentrationThresholds)
 
 
+class SourceUrls(BaseModel):
+    """Whatcom County download URLs. These DocumentCenter view IDs change with each
+    monthly release, so update them when refreshing. See DATA_SOURCES.md section 1.
+    """
+
+    short_master_csv: str = (
+        "https://www.whatcomcounty.us/DocumentCenter/View/102103/short-master-2026-05-01-csv"
+    )
+    parcels_shapefile: str = (
+        "https://www.whatcomcounty.us/DocumentCenter/View/102102/gis-shapefile-2026-05-01"
+    )
+
+
+class WebExport(BaseModel):
+    """How parcels are exported for the web app. GeoJSON for now, PMTiles later."""
+
+    output_crs: str = "EPSG:4326"
+    # Topology-preserving simplification tolerance, in output-CRS degrees (~7m).
+    simplify_tolerance: float = 0.00006
+    coordinate_precision: int = 5
+
+
 class Config(BaseModel):
     """Resolved pipeline configuration."""
 
     pipeline_root: Path = PIPELINE_ROOT
     data_dir: Path = PIPELINE_ROOT / "data"
     tiles_output_dir: Path = REPO_ROOT / "webapp" / "public" / "tiles"
+    web_data_dir: Path = REPO_ROOT / "webapp" / "public" / "data"
     thresholds: Thresholds = Field(default_factory=Thresholds)
+    sources: SourceUrls = Field(default_factory=SourceUrls)
+    web_export: WebExport = Field(default_factory=WebExport)
 
     @property
     def raw_dir(self) -> Path:
@@ -60,8 +85,14 @@ class Config(BaseModel):
         return self.data_dir / "cache"
 
     def ensure_dirs(self) -> None:
-        """Create the data and tile output directories if they do not exist."""
-        for path in (self.raw_dir, self.intermediate_dir, self.cache_dir, self.tiles_output_dir):
+        """Create the data and output directories if they do not exist."""
+        for path in (
+            self.raw_dir,
+            self.intermediate_dir,
+            self.cache_dir,
+            self.tiles_output_dir,
+            self.web_data_dir,
+        ):
             path.mkdir(parents=True, exist_ok=True)
 
 
