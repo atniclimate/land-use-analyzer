@@ -3,6 +3,7 @@
 CLAUDE.md
 PHASE_PLAN.md
 KICKOFF_PROMPT.md
+CONTINUATION_PROMPT.md
 
 # Environment
 .env
